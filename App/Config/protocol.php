@@ -17,7 +17,7 @@ return [
         'ip' => '0.0.0.0',
         'set' => [
         ],
-//        'global_data' => [
+//        'global_data' => [ //globalData 配置
 //            'ip' => '127.0.0.1',
 //            'port' => 9086,
 //            'protocol' => \One\Protocol\Frame::class,
