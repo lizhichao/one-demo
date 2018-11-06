@@ -8,7 +8,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "lizhichao/one": "*"
+        "lizhichao/one": ">=1.2"
     },
     "autoload": {
         "psr-4": {
