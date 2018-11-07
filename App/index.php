@@ -4,7 +4,8 @@ define('_APP_PATH_', __DIR__);
 
 define('_APP_PATH_VIEW_', __DIR__ . '/View');
 
-require __DIR__ . '/../One/run.php';
+require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../vendor/lizhichao/one/src/run.php';
 
 $req = new \One\Http\Request();
 $res = new \One\Http\Response($req);
