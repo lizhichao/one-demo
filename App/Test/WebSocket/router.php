@@ -8,7 +8,10 @@
 
 use One\Http\Router;
 
-Router::group(['namespace'=>'App\\Test\\Websocket'],function (){
+
+Router::get('/ws',\App\Test\HttpController::class.'@ws');
+
+Router::group(['namespace'=>'App\\Test\\WebSocket'],function (){
     Router::set('ws','/a','TestController@abc');
     Router::set('ws','/b','TestController@bbb');
 });
