@@ -11,7 +11,7 @@ return [
         'default' => [  // 默认配置方法
             'max_connect_count' => 10, // 连接池最大数量
             'host' => '127.0.0.1',
-            'port' => 6379,
+            'port' => 6378,
             'prefix' => 'one_'
         ]
     ]
