@@ -16,6 +16,11 @@ use One\Swoole\WebSocket;
 
 class AppWebSocket extends WebSocket
 {
+    public function onHandShake(\swoole_http_request $request, \swoole_http_response $response)
+    {
+        return parent::onHandShake($request, $response);
+    }
+
     public function onMessage(\swoole_websocket_server $server, \swoole_websocket_frame $frame)
     {
         $info = json_decode($frame->data, true);
@@ -23,8 +28,8 @@ class AppWebSocket extends WebSocket
         Log::setTraceId($frame->uuid);
         try {
             $router = new Router();
-            list($frame->class, $frame->method, $mids, $action, $frame->args) = $router->explain('ws', $info['uri'], $frame, $this);
-            $f = $router->getExecAction($mids, $action, $frame, $this);
+            list($frame->class, $frame->method, $mids, $action, $frame->args) = $router->explain('ws', $info['uri'], $frame, $this, $this->session[$frame->fd]);
+            $f = $router->getExecAction($mids, $action, $frame, $this, $this->session[$frame->fd]);
             $data = $f();
         } catch (RouterException $e) {
             $data = $e->getMessage();
@@ -35,5 +40,10 @@ class AppWebSocket extends WebSocket
         if ($data) {
             $server->push($data, $frame->fd);
         }
+    }
+
+    public function onOpen(\swoole_websocket_server $server, \swoole_http_request $request)
+    {
+        return true;
     }
 }
