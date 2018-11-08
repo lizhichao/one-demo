@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'debug_log' => false, // 是否打印sql日志
+    'debug_log' => true, // 是否打印sql日志
     'default' => [
         'max_connect_count' => 10, // 连接池最大连接的数量
         'dns' => 'mysql:host=127.0.0.1;dbname=test',
@@ -14,7 +14,7 @@ return [
     ],
     'test' => [
         'max_connect_count' => 10,
-        'dns' => 'mysql:host=127.0.0.1;dbname=test',
+        'dns' => 'mysql:host=localhost;dbname=test',
         'username' => 'root',
         'password' => '123456',
         'ops' => [
