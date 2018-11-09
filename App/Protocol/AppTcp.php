@@ -43,6 +43,5 @@ class AppTcp extends Server
         if ($res) {
             $server->send($fd, $res);
         }
-
     }
 }

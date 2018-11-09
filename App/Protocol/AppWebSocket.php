@@ -47,8 +47,22 @@ class AppWebSocket extends WebSocket
         }
     }
 
+    /**
+     * 这里可以做session 权限控制 return false 拒绝连接
+     * @param \swoole_websocket_server $server
+     * @param \swoole_http_request $request
+     * @return bool
+     */
     public function onOpen(\swoole_websocket_server $server, \swoole_http_request $request)
     {
+//        $this->session[$request->fd]->get('user');
         return true;
+    }
+
+
+    public function onClose(\swoole_server $server, $fd, $reactor_id)
+    {
+        parent::onClose($server, $fd, $reactor_id);
+        unset($this->session[$fd]);
     }
 }
