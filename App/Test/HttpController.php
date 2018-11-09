@@ -17,4 +17,10 @@ class HttpController extends Controller
     {
         return $this->display('ws');
     }
+
+    public function wsRouter()
+    {
+        return $this->display('wsRouter');
+    }
+
 }

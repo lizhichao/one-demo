@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ws</title>
+    <title>ws router</title>
 </head>
 <body>
 <script>
@@ -20,8 +20,10 @@
     ws.onmessage = function (d) {
         console.log(d.data);
     };
-    w.send = function (data) {
-        ws.send(data);
+    w.send = function (url,data) {
+        if(url && data){
+            ws.send(JSON.stringify({u:url,d:data}));
+        }
     };
 })(window);
 </script>

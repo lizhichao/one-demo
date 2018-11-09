@@ -10,6 +10,7 @@ use One\Http\Router;
 
 
 Router::get('/ws',\App\Test\HttpController::class.'@ws');
+Router::get('/ws/router',\App\Test\HttpController::class.'@wsRouter');
 
 Router::group(['namespace'=>'App\\Test\\WebSocket'],function (){
     Router::set('ws','/a','TestController@abc');

@@ -11,7 +11,7 @@ return [
     'server' => [
         'server_type' => \One\Swoole\OneServer::SWOOLE_WEBSOCKET_SERVER, // webSocket带路由
         'port' => 8082,
-        'action' => \App\Test\WebSocket\Ws::class,
+        'action' => \App\Protocol\AppWebSocket::class,
         'mode' => SWOOLE_PROCESS,
         'sock_type' => SWOOLE_SOCK_TCP,
         'ip' => '0.0.0.0',

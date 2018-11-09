@@ -24,8 +24,8 @@ class AppWebSocket extends WebSocket
     public function onMessage(\swoole_websocket_server $server, \swoole_websocket_frame $frame)
     {
         $info = json_decode($frame->data, true);
-        if(!$info || !isset($info['u']) || !isset($info['d'])){
-            $this->push($frame->fd,'格式错误');
+        if (!$info || !isset($info['u']) || !isset($info['d'])) {
+            $this->push($frame->fd, '格式错误');
             return false;
         }
         $frame->body = $info['d'];
@@ -43,7 +43,7 @@ class AppWebSocket extends WebSocket
         }
 
         if ($data) {
-            $server->push($data, $frame->fd);
+            $server->push($frame->fd, $data);
         }
     }
 
