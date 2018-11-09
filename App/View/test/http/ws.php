@@ -16,7 +16,6 @@
     };
     ws.onopen = function () {
         console.log('ws open');
-        ws.send('get_users');
     };
     ws.onmessage = function (d) {
         console.log(d.data);
@@ -32,7 +31,6 @@
     };
     ws.onopen = function () {
         console.log('ws open');
-        ws.send('get_users');
     };
     ws.onmessage = function (d) {
         console.log(d.data);
