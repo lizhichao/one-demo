@@ -15,30 +15,30 @@ composer create-project lizhichao/one-demo
 
 [代码地址](https://github.com/lizhichao/one-demo/tree/master/App/Test/WebSocket)
 
-   * 带路由列子
-   
-   ```
-    #启动
-    php App/swoole.php test_ws_router
-    
-    #测试地址
-    http://127.0.0.1:8081/ws/router
-    
-    #打开浏览器控制台 send(url,content)
-    send('a','xxxx')
-   ```
-   * 不带路由例子
-      
-   ```
-    #启动
-    php App/swoole.php test_ws
-    
-    #测试地址
-    http://127.0.0.1:8081/ws
-    
-    #打开浏览器控制台 send(content)
-    send('xxxx')
-   ```
+* 带路由列子
+
+```
+#启动
+php App/swoole.php test_ws_router
+
+#测试地址
+http://127.0.0.1:8081/ws/router
+
+#打开浏览器控制台 send(url,content)
+send('a','xxxx')
+```
+* 不带路由例子
+  
+```
+#启动
+php App/swoole.php test_ws
+
+#测试地址
+http://127.0.0.1:8081/ws
+
+#打开浏览器控制台 send(content)
+send('xxxx')
+```
 
    
 ### orm模型使用列子
@@ -47,32 +47,43 @@ composer create-project lizhichao/one-demo
 
 ### tcp使用列子
 
-   * 带路由列子
-   
-   ```
-    #启动
-    php App/swoole.php test_tcp_router
-    
-   ```
-   * 不带路由例子
-      
-   ```
-    #启动
-    php App/swoole.php test_tcp
-    
-   ```
+* 带路由列子
 
-### websocket、http和tcp、udp混合协议之间相互通讯列子
+```
+#启动
+php App/swoole.php test_tcp_router
 
-   
-   ```
-    #启动globalData
-    php App/swoole.php global_data
-    
-    #启动服务
-    php App/swoole.php test_all
-    
-   ```
+```
+* 不带路由例子
+  
+```
+#启动
+php App/swoole.php test_tcp
+
+```
+
+### 各种混合协议之间相互通讯列子
+
+* socket.io （websocket http）
+
+```
+#启动globalData
+php App/swoole.php global_data
+
+#启动服务
+php App/swoole.php socket_io
+
+```
+
+*  websocket、http和tcp、udp混合通讯 （只要swoole支持的协议都可以，这里就不一一举例了）
+```
+#启动globalData
+php App/swoole.php global_data
+
+#启动服务
+php App/swoole.php test_all
+
+```
 
 ### task任务使用列子
 
