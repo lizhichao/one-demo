@@ -43,7 +43,32 @@ composer create-project lizhichao/one-demo
 
 3. tcp使用列子
 
+    * 带路由列子
+   
+   ```
+    #启动
+    php App/swoole.php test_tcp_router
+    
+   ```
+   * 不带路由例子
+      
+   ```
+    #启动
+    php App/swoole.php test_tcp
+    
+   ```
+
 4. websocket、http和tcp、udp混合协议之间相互通讯列子
+
+   
+   ```
+    #启动globalData
+    php App/swoole.php global_data
+    
+    #启动服务
+    php App/swoole.php test_all
+    
+   ```
 
 5. task任务使用列子
 
@@ -52,3 +77,8 @@ composer create-project lizhichao/one-demo
 7. globalData进程之间内存共享使用列子
 
 8. 路由中间件使用列子
+
+
+## 注意
+
+`php App/swoole.php xxx`  其实就是启动Config下`xxx.php`配置的swoole服务器 
