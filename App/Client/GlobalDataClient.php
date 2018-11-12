@@ -25,19 +25,21 @@ class GlobalDataClient extends AsyncClient
 
     public function onReceive(\swoole_client $cli, $data)
     {
-        echo 'receive:'.$data.PHP_EOL;
+        echo 'receive:' . $data . PHP_EOL;
     }
 
     public function __call($name, $arguments)
     {
         if ($this->connected === 1 && method_exists($this->global, $name)) {
-            $data = serialize(['m' => $name,'args' => $arguments]);
+            $data = serialize(['m' => $name, 'args' => $arguments]);
             $this->send($data);
             if (strpos($name, 'get') !== false) {
                 return unserialize($this->protocol::decode($this->cli->recv()));
-            }else{
+            } else {
                 return 1;
             }
+        } else {
+            return 0;
         }
     }
 }
