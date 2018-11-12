@@ -51,7 +51,7 @@ class HttpController extends Controller
             $this->session()->set('name', $name);
         }
         $this->server->set("http.{$name}", 1, time() + 600);
-        $this->sendTo('all',json_encode(['v' => 1,'n' => $name])."\n");
+        $this->sendTo('all', json_encode(['v' => 1, 'n' => $name]));
         return $this->display('http', ['list' => $this->getAllName(), 'name' => $name]);
     }
 
@@ -86,7 +86,7 @@ class HttpController extends Controller
         $n = $this->request->post('n');
         $d = $this->request->post('d');
         if ($n && $d) {
-            $this->sendTo($n, json_encode(['v' => 3, 'n' => $d]) . "\n");
+            $this->sendTo($n, json_encode(['v' => 3, 'n' => $d]));
             return '1';
         }
         return '0';
