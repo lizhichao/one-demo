@@ -9,8 +9,6 @@
             * [带路由列子](https://github.com/lizhichao/one-demo/blob/master/README.md#带路由列子-1)
             * [不带路由例子](https://github.com/lizhichao/one-demo/blob/master/README.md#不带路由例子-1)
         * [各种混合协议之间相互通讯列子](https://github.com/lizhichao/one-demo/blob/master/README.md#各种混合协议之间相互通讯列子)
-            * [socket.io](https://github.com/lizhichao/one-demo/blob/master/README.md#socket.io)
-            * [websocket、http和tcp混合通讯](https://github.com/lizhichao/one-demo/blob/master/README.md#websocket、http和tcp混合通讯)
         * [task任务使用列子](https://github.com/lizhichao/one-demo/blob/master/README.md#task任务使用列子)
         * [rpc调用例子](https://github.com/lizhichao/one-demo/blob/master/README.md#rpc调用例子)
         * [globalData进程之间内存共享使用列子](https://github.com/lizhichao/one-demo/blob/master/README.md#globaldata进程之间内存共享使用列子)
@@ -81,20 +79,6 @@ php App/swoole.php test_tcp
 ```
 
 ### 各种混合协议之间相互通讯列子
-
-#### socket.io
-> websocket与http通讯
-
-```
-#启动globalData
-php App/swoole.php global_data
-
-#启动服务
-php App/swoole.php socket_io
-
-```
-
-#### websocket、http和tcp混合通讯
 
 > 只要swoole支持的协议都可以，这里就不一一举例了
 
