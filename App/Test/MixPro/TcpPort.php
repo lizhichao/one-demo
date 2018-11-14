@@ -24,14 +24,14 @@ class TcpPort extends Tcp
         $this->sendTo('all', json_encode(['v' => 1, 'n' => $name]));
         $this->sendToTcp($fd, json_encode(['v' => 4, 'n' => $this->getAllName()]));
         $this->bindName($fd, $name);
-        $this->send($fd, "你的名字是：" . $name . "\n");
+        $this->send($fd, "你的名字是：" . $name);
     }
 
     public function onReceive(\swoole_server $server, $fd, $reactor_id, $data)
     {
         $arr = explode(' ', $data);
         if (count($arr) !== 3 || $arr[0] !== 'send') {
-            $this->send($fd, "格式不正确\n");
+            $this->send($fd, "格式不正确");
             return false;
         }
         $n = $arr[1];
@@ -42,7 +42,7 @@ class TcpPort extends Tcp
     public function onClose(\swoole_server $server, $fd, $reactor_id)
     {
         parent::onClose($server, $fd, $reactor_id);
-        $this->sendTo('all', json_encode(['v' => 2, 'n' => $this->users[$fd]]) . "\n");
+        $this->sendTo('all', json_encode(['v' => 2, 'n' => $this->users[$fd]]));
         unset($this->users[$fd]);
     }
 
