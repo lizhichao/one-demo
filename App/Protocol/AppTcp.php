@@ -13,9 +13,9 @@ use One\Facades\Log;
 use One\Http\Router;
 use One\Http\RouterException;
 use One\Protocol\TcpRouterData;
-use One\Swoole\Server;
+use One\Swoole\Server\TcpServer;
 
-class AppTcp extends Server
+class AppTcp extends TcpServer
 {
 
     /**

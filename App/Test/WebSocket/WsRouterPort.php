@@ -1,20 +1,20 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: tanszhe
- * Date: 2018/8/24
- * Time: 下午4:59
+ * User: admin
+ * Date: 2018/11/8
+ * Time: 11:40
  */
 
-namespace App\Protocol;
+namespace App\Test\WebSocket;
 
 
 use One\Facades\Log;
 use One\Http\Router;
 use One\Http\RouterException;
-use One\Swoole\Server\WsServer;
+use One\Swoole\Listener\Ws;
 
-class AppWebSocket extends WsServer
+class WsRouterPort extends Ws
 {
     public function onHandShake(\swoole_http_request $request, \swoole_http_response $response)
     {
@@ -25,7 +25,7 @@ class AppWebSocket extends WsServer
     {
         $info = json_decode($frame->data, true);
         if (!$info || !isset($info['u']) || !isset($info['d'])) {
-            $this->push($frame->fd, '格式错误');
+            $this->server->push($frame->fd, '格式错误');
             return false;
         }
         $frame->body = $info['d'];
@@ -33,8 +33,8 @@ class AppWebSocket extends WsServer
         Log::setTraceId($frame->uuid);
         try {
             $router = new Router();
-            list($frame->class, $frame->method, $mids, $action, $frame->args) = $router->explain('ws', $info['u'], $frame, $this, $this->session[$frame->fd]);
-            $f = $router->getExecAction($mids, $action, $frame, $this, $this->session[$frame->fd]);
+            list($frame->class, $frame->method, $mids, $action, $frame->args) = $router->explain('ws', $info['u'], $frame, $this->server, $this->session[$frame->fd]);
+            $f = $router->getExecAction($mids, $action, $frame, $this->server, $this->session[$frame->fd]);
             $data = $f();
         } catch (RouterException $e) {
             $data = $e->getMessage();

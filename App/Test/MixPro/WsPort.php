@@ -9,9 +9,9 @@
 namespace App\Test\MixPro;
 
 
-use One\Swoole\WebSocket;
+use One\Swoole\Listener\Ws;
 
-class Ws extends WebSocket
+class WsPort extends Ws
 {
     use Funs;
 
@@ -38,7 +38,7 @@ class Ws extends WebSocket
         if ($name) {
             $this->users[$request->fd] = $name;
             $this->sendTo('all', json_encode(['v' => 1, 'n' => $name]));
-            $this->bindName($request->fd, $name);
+            $this->server->bindName($request->fd, $name);
             return true;
         } else {
             return false;

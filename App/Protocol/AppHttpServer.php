@@ -14,7 +14,7 @@ use One\Exceptions\HttpException;
 use One\Facades\Log;
 use One\Http\Router;
 use One\Http\RouterException;
-use One\Swoole\HttpServer;
+use One\Swoole\Server\HttpServer;
 
 class AppHttpServer extends HttpServer
 {

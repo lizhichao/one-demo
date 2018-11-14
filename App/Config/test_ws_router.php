@@ -9,8 +9,8 @@
 
 return [
     'server' => [
-        'server_type' => \One\Swoole\OneServer::SWOOLE_WEBSOCKET_SERVER, // webSocket带路由
-        'port' => 8082,
+        'server_type' => \One\Swoole\OneServer::SWOOLE_HTTP_SERVER, // webSocket带路由
+        'port' => 8081,
         'action' => \App\Protocol\AppWebSocket::class,
         'mode' => SWOOLE_PROCESS,
         'sock_type' => SWOOLE_SOCK_TCP,
@@ -20,13 +20,13 @@ return [
     ],
     'add_listener' => [
         [
-            'port' => 8081,
-            'action' => \App\Protocol\AppHttpServer::class,
+            'port' => 8082,
+            'action' => \App\Test\WebSocket\WsRouterPort::class,
             'type' => SWOOLE_SOCK_TCP,
             'ip' => '0.0.0.0',
             'set' => [
-                'open_http_protocol' => true,
-                'open_websocket_protocol' => false
+                'open_http_protocol' => false,
+                'open_websocket_protocol' => true
             ]
         ]
     ]

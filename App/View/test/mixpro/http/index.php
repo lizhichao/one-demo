@@ -11,8 +11,8 @@
 </head>
 <body>
 <h1>tpc http websocket 相互通信demo</h1>
-<p><a href="/http?code=<?=$code;?>">http轮训</a></p>
-<p><a href="/ws?code=<?=$code;?>">websocket</a></p>
+<p><a href="/mix/http?code=<?=$code;?>">http轮训</a></p>
+<p><a href="/mix/ws?code=<?=$code;?>">websocket</a></p>
 <p>
     tcp:连接方法<br>
     telnet 127.0.0.1 9082<br><br>

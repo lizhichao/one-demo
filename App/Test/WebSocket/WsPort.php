@@ -9,9 +9,9 @@
 namespace App\Test\WebSocket;
 
 
-use One\Swoole\WebSocket;
+use One\Swoole\Listener\Ws;
 
-class Ws extends WebSocket
+class WsPort extends Ws
 {
     public function onMessage(\swoole_websocket_server $server, \swoole_websocket_frame $frame)
     {

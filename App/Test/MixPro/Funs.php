@@ -29,15 +29,50 @@ trait Funs
                 if (isset($info['websocket_status'])) {
                     $this->push($fd, $d);
                 } else if ($info) {
-                    $this->send($fd, $d);
-                }else{
+                    $this->sendToTcp($fd, $d);
+                } else {
                     $this->unBindFd($fd);
                 }
             }
         } else if ($this->get("http.{$n}")) { // http 用户
             $this->set("data.{$n}.", $d, time() + 60);
         } else {
-            $this->sendOrPushByName($n, $d);
+            $fds = $this->getFdByName($n);
+            if (!$fds) {
+                return false;
+            }
+            foreach ($fds as $fd) {
+                if ($this->exist($fd)) {
+                    $info = $this->getClientInfo($fd);
+                    if (isset($info['websocket_status'])) {
+                        $this->push($fd, $d);
+                    } else if ($info) {
+                        $this->sendToTcp($fd, $d);
+                    }
+                } else {
+                    $this->unBindFd($fd);
+                }
+            }
+
+        }
+    }
+
+
+    protected function sendToTcp($fd, $str)
+    {
+        $arr = json_decode($str, true);
+        if ($arr['v'] == 1) {
+            $this->send($fd, "用户加入:{$arr['n']}\n");
+        } else if ($arr['v'] == 2) {
+            $this->send($fd, "用户退出:{$arr['n']}\n");
+        } else if ($arr['v'] == 3) {
+            $this->send($fd, "收到消息:{$arr['n']}\n");
+        } else if ($arr['v'] == 4) {
+            $str = '';
+            foreach ($arr['n'] as $n => $v) {
+                $str .= "\t{$n}\n";
+            }
+            $this->send($fd, "当前在线用户:\n{$str}");
         }
     }
 

@@ -36,7 +36,7 @@ class HttpController extends Controller
             $name = uuid();
             $this->session()->set('name', $name);
         }
-        $this->server->set("http.{$name}", 1, time() + 600);
+        $this->server->set("http.{$name}", 1, time() + 60);
         return $this->display('ws');
     }
 
@@ -50,7 +50,7 @@ class HttpController extends Controller
             $name = uuid();
             $this->session()->set('name', $name);
         }
-        $this->server->set("http.{$name}", 1, time() + 600);
+        $this->server->set("http.{$name}", 1, time() + 60);
         $this->sendTo('all', json_encode(['v' => 1, 'n' => $name]));
         return $this->display('http', ['list' => $this->getAllName(), 'name' => $name]);
     }
@@ -61,7 +61,7 @@ class HttpController extends Controller
     public function httpLoop()
     {
         $name = $this->session()->get('name');
-        $this->server->set("http.{$name}", 1, time() + 600);//续命
+        $this->server->set("http.{$name}", 1, time() + 60);
         $i = 0;
         do {
             $data = $this->server->getAndDel("data.{$name}");

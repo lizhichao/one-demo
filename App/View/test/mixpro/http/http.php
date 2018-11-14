@@ -84,7 +84,7 @@
             $('#content').append($('<p>'+JSON.stringify(da)+'<p>'));
         }};
     function send(t) {
-        $.post('/send',$(t).serialize(), function (da) {
+        $.post('/mix/http/send',$(t).serialize(), function (da) {
             // console.log(da);
         });
         t.d.value = '';
@@ -92,7 +92,7 @@
     }
     function getData(){
         var sel = $('.a1>select');
-        $.get('/get/data', 'ss='+(new Date()).getTime(), function (r) {
+        $.post('/mix/http/loop', 'ss='+(new Date()).getTime(), function (r) {
             var da = r.res;
             // console.log(r);
             for (var i = 0; i < da.length; i++) {
