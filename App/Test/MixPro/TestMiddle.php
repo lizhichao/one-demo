@@ -8,10 +8,9 @@
 
 namespace App\Test\MixPro;
 
-
-
 use One\Swoole\Response;
 use One\Swoole\Server;
+use Swoole\Server\Port;
 
 class TestMiddle
 {
@@ -29,7 +28,13 @@ class TestMiddle
         return $next();
     }
 
-    public function isLogin($next, Response $response, Server $server)
+    /**
+     * @param $next
+     * @param Response $response
+     * @param Server|Port $server
+     * @return string
+     */
+    public function isLogin($next, Response $response, $server)
     {
         $name = $response->session()->get('name');
         if($name){

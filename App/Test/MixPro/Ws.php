@@ -8,10 +8,9 @@
 
 namespace App\Test\MixPro;
 
+use One\Swoole\Server\WsServer;
 
-use One\Swoole\Listener\Ws;
-
-class WsPort extends Ws
+class Ws extends WsServer
 {
     use Funs;
 

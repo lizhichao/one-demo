@@ -13,14 +13,13 @@
 方法：send('all',content);广播<br>
 <script>
     (function (w) {
-        let user = {};
-        let ws = new WebSocket('ws://one.vicsdf.com:9080');
+        let user = <?php echo json_encode($users); ?>;
+        let ws = new WebSocket('ws://'+document.location.hostname+':8082');
         ws.onclose = function () {
             console.log('ws 关闭了');
         };
         ws.onopen = function () {
             console.log('ws open');
-            ws.send('get_users');
         };
         ws.onmessage = function (d) {
             console.log(d.data);

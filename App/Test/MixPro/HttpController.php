@@ -37,7 +37,7 @@ class HttpController extends Controller
             $this->session()->set('name', $name);
         }
         $this->server->set("http.{$name}", 1, time() + 60);
-        return $this->display('ws');
+        return $this->display('ws',['users' => $this->getAllName()]);
     }
 
     /**
