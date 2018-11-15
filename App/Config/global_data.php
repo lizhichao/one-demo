@@ -10,7 +10,7 @@ return [
     'server' => [
         'server_type' => \One\Swoole\OneServer::SWOOLE_SERVER, // 主服务器类型
         'port' => 9086,
-        'action' =>\One\Swoole\GlobalDataServer::class, // 主服务器事件回调类
+        'action' =>\App\GlobalData\Server::class, // 主服务器事件回调类
         'mode' => SWOOLE_BASE,
         'sock_type' => SWOOLE_SOCK_TCP,
         'ip' => '127.0.0.1',

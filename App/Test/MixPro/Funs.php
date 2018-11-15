@@ -42,15 +42,11 @@ trait Funs
                 return false;
             }
             foreach ($fds as $fd) {
-                if ($this->exist($fd)) {
-                    $info = $this->getClientInfo($fd);
-                    if (isset($info['websocket_status'])) {
-                        $this->push($fd, $d);
-                    } else if ($info) {
-                        $this->sendToTcp($fd, $d);
-                    }
-                } else {
-                    $this->unBindFd($fd);
+                $info = $this->getClientInfo($fd);
+                if (isset($info['websocket_status'])) {
+                    $this->push($fd, $d);
+                } else if ($info) {
+                    $this->sendToTcp($fd, $d);
                 }
             }
 

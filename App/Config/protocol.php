@@ -11,7 +11,7 @@ return [
     'server' => [
         'server_type' => \One\Swoole\OneServer::SWOOLE_HTTP_SERVER,
         'port' => 8081,
-        'action' => \App\Protocol\AppHttpServer::class,
+        'action' => \App\Server\AppHttpServer::class,
         'mode' => SWOOLE_PROCESS,
         'sock_type' => SWOOLE_SOCK_TCP,
         'ip' => '0.0.0.0',
@@ -21,7 +21,7 @@ return [
             'ip' => '127.0.0.1',
             'port' => 9086,
             'protocol' => \One\Protocol\Frame::class,
-            'action' => \App\Client\GlobalDataClient::class,
+            'action' => \App\GlobalData\Client::class,
             'time' => 0.5,
             'async' => 0,
             'set' => [

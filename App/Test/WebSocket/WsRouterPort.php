@@ -12,15 +12,10 @@ namespace App\Test\WebSocket;
 use One\Facades\Log;
 use One\Http\Router;
 use One\Http\RouterException;
-use One\Swoole\Listener\Ws;
+use One\Swoole\Server\WsServer;
 
-class WsRouterPort extends Ws
+class WsRouterPort extends WsServer
 {
-    public function onHandShake(\swoole_http_request $request, \swoole_http_response $response)
-    {
-        return parent::onHandShake($request, $response);
-    }
-
     public function onMessage(\swoole_websocket_server $server, \swoole_websocket_frame $frame)
     {
         $info = json_decode($frame->data, true);
@@ -45,18 +40,5 @@ class WsRouterPort extends Ws
         if ($data) {
             $server->push($frame->fd, $data);
         }
-    }
-
-    public function onOpen(\swoole_websocket_server $server, \swoole_http_request $request)
-    {
-//        $this->session[$request->fd]->get('user');
-        return true;
-    }
-
-
-    public function onClose(\swoole_server $server, $fd, $reactor_id)
-    {
-        parent::onClose($server, $fd, $reactor_id);
-        unset($this->session[$fd]);
     }
 }

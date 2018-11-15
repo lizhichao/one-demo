@@ -47,6 +47,7 @@ class WsPort extends Ws
 
     public function onClose(\swoole_server $server, $fd, $reactor_id)
     {
+        echo "ws close {$fd} \n";
         parent::onClose($server, $fd, $reactor_id);
         $this->sendTo('all', json_encode(['v' => 2, 'n' => $this->users[$fd]]));
         unset($this->users[$fd]);
