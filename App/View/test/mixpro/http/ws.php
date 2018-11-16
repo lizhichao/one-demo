@@ -14,6 +14,11 @@
 <script>
     (function (w) {
         let user = <?php echo json_encode($users); ?>;
+        console.group("用户列表");
+        console.log(JSON.stringify(user,null,2));
+        console.groupEnd();
+
+
         let ws = new WebSocket('ws://'+document.location.hostname+':8082');
         ws.onclose = function () {
             console.log('ws 关闭了');
@@ -26,10 +31,10 @@
             var o = JSON.parse(d.data.replace(/\n/,''));
             if(o.v === 1){ //用户加入
                 user[o.n] = 1;
-                console.log('用户加入'+o.n,user);
+                console.log('用户加入'+o.n,JSON.stringify(user,null,2));
             }else if(o.v === 2){ //用户退出
                 delete user[o.n];
-                console.log('用户退出'+o.n,user);
+                console.log('用户退出'+o.n,JSON.stringify(user,null,2));
             }else if(o.v === 3){ //消息
                 console.log('收到消息',o.n);
             }else if(o.v === 4){

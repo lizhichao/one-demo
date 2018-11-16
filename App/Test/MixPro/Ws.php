@@ -33,11 +33,11 @@ class Ws extends WsServer
 
     public function onOpen(\swoole_websocket_server $server, \swoole_http_request $request)
     {
-        $name = $this->session->get('name');
+        $name = $this->session[$request->fd]->get('name');
         if ($name) {
             $this->users[$request->fd] = $name;
             $this->sendTo('all', json_encode(['v' => 1, 'n' => $name]));
-            $this->server->bindName($request->fd, $name);
+            $this->bindName($request->fd, $name);
             return true;
         } else {
             return false;
