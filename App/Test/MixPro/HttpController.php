@@ -36,7 +36,7 @@ class HttpController extends Controller
             $name = uuid();
             $this->session()->set('name', $name);
         }
-        return $this->display('ws',['users' => $this->getAllName()]);
+        return $this->display('ws',['users' => $this->getAllName(),'name' => $name]);
     }
 
     /**

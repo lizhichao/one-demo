@@ -19,7 +19,6 @@ class AppHttpPort extends Http
 
     public function onClose(\swoole_server $server, $fd, $reactor_id)
     {
-        echo "http close {$fd}\n";
         parent::onClose($server, $fd, $reactor_id);
     }
 }

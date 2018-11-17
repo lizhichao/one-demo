@@ -11,6 +11,7 @@
 请在控制台操作和查看<br>
 方法：send(name,content);向某人发信息<br>
 方法：send('all',content);广播<br>
+name：<?php echo $name;?><br>
 <script>
     (function (w) {
         let user = <?php echo json_encode($users); ?>;
