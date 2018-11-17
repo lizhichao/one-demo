@@ -9,9 +9,6 @@
 
 namespace App\Server;
 
-use One\Facades\Log;
-use One\Http\Router;
-use One\Http\RouterException;
 use One\Protocol\TcpRouterData;
 use One\Swoole\Server\TcpServer;
 
@@ -26,6 +23,6 @@ class AppTcp extends TcpServer
      */
     public function onReceive(\swoole_server $server, $fd, $reactor_id, $data)
     {
-        $this->router($server,$fd,$reactor_id,$data);
+        $this->tcpRouter($server,$fd,$reactor_id,$data);
     }
 }

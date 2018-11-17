@@ -58,11 +58,11 @@ trait Funs
     {
         $arr = json_decode($str, true);
         if ($arr['v'] == 1) {
-            $this->send($fd, "用户加入:{$arr['n']}");
+            $this->send($fd, "用户加入:{$arr['n']}\n");
         } else if ($arr['v'] == 2) {
-            $this->send($fd, "用户退出:{$arr['n']}");
+            $this->send($fd, "用户退出:{$arr['n']}\n");
         } else if ($arr['v'] == 3) {
-            $this->send($fd, "收到消息:{$arr['n']}");
+            $this->send($fd, "收到消息:{$arr['n']}\n");
         } else if ($arr['v'] == 4) {
             $str = '';
             foreach ($arr['n'] as $n => $v) {

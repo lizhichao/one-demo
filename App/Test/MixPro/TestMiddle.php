@@ -20,7 +20,7 @@ class TestMiddle
         $code = $response->session()->get('code');
         $req = $response->getHttpRequest();
         if (!$name && ($req->get('code') != $code || !$code)) {
-            return '<a href="/">go login in</a>';
+            return '<a href="/mix">go login in</a>';
         }
         if ($code) {
             $response->session()->del('code'); //只用一次

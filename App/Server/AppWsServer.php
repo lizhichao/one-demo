@@ -19,7 +19,7 @@ class AppWsServer extends WsServer
 
     public function onMessage(\swoole_websocket_server $server, \swoole_websocket_frame $frame)
     {
-        $this->router($server,$frame);
+        $this->wsRouter($server,$frame);
     }
 
     public function onOpen(\swoole_websocket_server $server, \swoole_http_request $request)

@@ -41,4 +41,9 @@ class Server extends TcpServer
 
     }
 
+    public function onClose(\swoole_server $server, $fd, $reactor_id)
+    {
+
+    }
+
 }
