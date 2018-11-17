@@ -80,6 +80,10 @@ php App/swoole.php test_tcp
 
 ### 各种混合协议之间相互通讯列子
 
+http webSocket Tcp 相互通讯
+
+[代码地址](https://github.com/lizhichao/one-demo/tree/master/App/Test/MixPro)
+
 > 只要swoole支持的协议都可以，这里就不一一举例了
 
 ```

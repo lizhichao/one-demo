@@ -9,9 +9,6 @@
 namespace App\Test\WebSocket;
 
 
-use One\Facades\Log;
-use One\Http\Router;
-use One\Http\RouterException;
 use One\Swoole\Server\WsServer;
 
 class WsRouterPort extends WsServer
