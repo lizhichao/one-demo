@@ -93,6 +93,9 @@ php App/swoole.php global_data
 #启动服务
 php App/swoole.php test_all
 
+#打开地址
+http://127.0.0.1:8081/mix
+
 ```
 
 ### task任务使用列子
