@@ -8,7 +8,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return 'Hello World';
+        return __FILE__;
     }
 
 }

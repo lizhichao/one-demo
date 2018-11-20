@@ -18,12 +18,12 @@ class TestController extends Controller
      */
     public function insert()
     {
+        $key = uniqid('',true);
         $id = User::insert([
-            'name' => 'name1',
-            'email' => 'email1@aa.com',
-            'age' => 20
+            'a' => $key,
         ]);
-        return "insert id = {$id}";
+        $res = User::find($id);
+        return $key === $res->a ? 'success' : 'err';
     }
 
     /**
