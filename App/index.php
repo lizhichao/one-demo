@@ -23,6 +23,6 @@ try {
     echo \App\Exceptions\Handler::render(new \One\Exceptions\HttpException($res, $e->getMessage(), $e->getCode()));
 } catch (Exception $e) {
     echo $e->getMessage();
-    \One\Facades\Log::debug($e);
+    \One\Facades\Log::warn($e);
 }
 
