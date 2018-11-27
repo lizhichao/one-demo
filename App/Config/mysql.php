@@ -9,7 +9,8 @@ return [
         'password' => 'redhat',
         'ops' => [ // pdo 相关设置
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
-            PDO::ATTR_EMULATE_PREPARES => false
+            PDO::ATTR_EMULATE_PREPARES => false,
+            PDO::ATTR_PERSISTENT => true
         ]
     ],
     'test' => [
@@ -19,7 +20,8 @@ return [
         'password' => '123456',
         'ops' => [
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
-            PDO::ATTR_EMULATE_PREPARES => false
+            PDO::ATTR_EMULATE_PREPARES => false,
+            PDO::ATTR_PERSISTENT => true
         ]
     ]
 ];
