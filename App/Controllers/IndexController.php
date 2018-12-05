@@ -2,18 +2,19 @@
 
 namespace App\Controllers;
 
-use One\Facades\Log;
+use App\Test\Rpc\abc;
+use App\Test\Rpc\TestMiddle;
 use One\Http\Controller;
+use One\Swoole\Rpc\Server;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        Log::debug('abc');
-        Log::debug(['12,312']);
-        return __FILE__;
+        Server::group(['middle' => [TestMiddle::class . '@aa']], function () {
+            Server::add(abc::class);
+        });
+        $arr = ['i' => uniqid(), 'c' => abc::class, 'f' => 'func', 't' => ['a']];
+        echo Server::call($arr);
     }
-
-
-
 }

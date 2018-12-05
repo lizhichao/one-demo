@@ -31,10 +31,10 @@ class Client extends AsyncClient
     public function __call($name, $arguments)
     {
         if ($this->connected === 1 && method_exists($this->global, $name)) {
-            $data = serialize(['m' => $name, 'args' => $arguments]);
+            $data = msgpack_pack(['m' => $name, 'args' => $arguments]);
             $this->send($data);
             if (strpos($name, 'get') !== false) {
-                return unserialize($this->protocol::decode($this->cli->recv()));
+                return msgpack_unpack($this->protocol::decode($this->cli->recv()));
             } else {
                 return 1;
             }

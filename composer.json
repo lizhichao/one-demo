@@ -1,25 +1,31 @@
 {
-    "name": "lizhichao/one-demo",
-    "type": "library",
-    "description": "一个极简的php框架，可运行在fpm或者swoole协程模式下",
-    "keywords" : ["swoole", "framework", "async","one"],
-    "license" : "Apache-2.0",
-    "authors": [
-        {
-            "name": "tanszhe",
-            "email": "1018595261@qq.com"
-        }
-    ],
-    "require": {
-        "php": ">=7.0.0",
-        "lizhichao/one": "dev-master"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "App/"
-        }
-    },
-    "require-dev": {
-        "eaglewu/swoole-ide-helper": "dev-master"
+  "name": "lizhichao/one-demo",
+  "type": "library",
+  "description": "一个极简的php框架，可运行在fpm或者swoole协程模式下",
+  "keywords": [
+    "swoole",
+    "framework",
+    "async",
+    "one"
+  ],
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "tanszhe",
+      "email": "1018595261@qq.com"
     }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "ext-msgpack": "*",
+    "lizhichao/one": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "App/"
+    }
+  },
+  "require-dev": {
+    "eaglewu/swoole-ide-helper": "dev-master"
+  }
 }

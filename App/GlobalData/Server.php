@@ -25,11 +25,11 @@ class Server extends TcpServer
 
     public function onReceive(\swoole_server $server, $fd, $reactor_id, $data)
     {
-        $ar = unserialize($data);
+        $ar = msgpack_unpack($data);
         if (method_exists($this->global, $ar['m'])) {
             $ret = $this->global->{$ar['m']}(...$ar['args']);
             if (strpos($ar['m'], 'get') !== false) {
-                $this->send($fd, serialize($ret));
+                $this->send($fd, msgpack_pack($ret));
             }
         } else {
             echo "warn method {$ar['m']} not exist\n";
