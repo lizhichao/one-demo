@@ -8,25 +8,23 @@
 
 namespace App\Test\Rpc;
 
-class abc
+class Abc
 {
     private $a;
 
     public function __construct($a)
     {
         $this->a = $a;
-        echo __METHOD__ . ' a=' . $this->a . ' id=' . \Swoole\Coroutine::getuid() . PHP_EOL;
     }
 
-    public function func()
+    public function add($a, $b)
     {
-        echo __METHOD__ . ' a=' . $this->a . ' id=' . \Swoole\Coroutine::getuid() . PHP_EOL;
-
+        return $this->a + $a + $b;
     }
 
     public function __destruct()
     {
-        echo __METHOD__ . ' a=' . $this->a . ' id=' . \Swoole\Coroutine::getuid() . PHP_EOL;
+
     }
 
     public function setA($a)

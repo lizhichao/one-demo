@@ -15,6 +15,7 @@ require __DIR__ . '/config.php';
 
 \One\Http\Router::loadRouter();
 
+require _APP_PATH_ . '/Config/rpc.php';
 
 \One\Swoole\OneServer::setConfig(config(isset($argv[1]) ? $argv[1] : 'protocol'));
 

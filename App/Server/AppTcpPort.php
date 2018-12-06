@@ -10,9 +10,9 @@
 namespace App\Server;
 
 use One\Protocol\TcpRouterData;
-use One\Swoole\Server\TcpServer;
+use One\Swoole\Listener\Tcp;
 
-class AppTcpServer extends TcpServer
+class AppTcpPort extends Tcp
 {
 
     /**
