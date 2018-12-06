@@ -27,6 +27,11 @@ class Abc
 
     }
 
+    public function time()
+    {
+        return date('Y-m-d H:i:s');
+    }
+
     public function setA($a)
     {
         $this->a = $a;
