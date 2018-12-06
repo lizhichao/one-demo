@@ -8,10 +8,6 @@
 
 namespace App\Server;
 
-use One\Facades\Log;
-use One\Swoole\RpcServer;
-use One\Swoole\Server\HttpServer;
-use One\Swoole\Server\TcpServer;
 use One\Swoole\Server\WsServer;
 
 class RpcWsServer extends WsServer

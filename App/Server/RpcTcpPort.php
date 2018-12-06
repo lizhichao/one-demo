@@ -8,10 +8,7 @@
 
 namespace App\Server;
 
-use One\Facades\Log;
-use One\Swoole\Listener\Http;
 use One\Swoole\Listener\Tcp;
-use One\Swoole\RpcServer;
 
 class RpcTcpPort extends Tcp
 {
