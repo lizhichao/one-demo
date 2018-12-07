@@ -14,7 +14,7 @@ use One\Swoole\RpcServer;
 
 trait RpcTrait
 {
-    private function callRpc($data, $ide = 0)
+    private function callRpc($data, $ide = 0, $host = '', $px = '')
     {
         $arr = msgpack_unpack($data);
         if (isset($arr['c'])) {
@@ -24,7 +24,7 @@ trait RpcTrait
         } else if (isset($arr['i'])) {
             $str = RpcServer::close($arr['i']);
         } else if ($ide === 1) {
-            $str = 'rpc server';
+            $str = RpcServer::ideHelper($host, $px);
         } else {
             $str = 'params error';
         }

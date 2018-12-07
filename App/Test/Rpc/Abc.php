@@ -17,17 +17,22 @@ class Abc
         $this->a = $a;
     }
 
-    public function add($a, $b)
+    /**
+     * @param int $a
+     * @param $b
+     * @return int
+     */
+    public function add(int $a, $b)
     {
         return $this->a + $a + $b;
     }
 
-    public function __destruct()
+    public static function asfaf()
     {
 
     }
 
-    public function time()
+    public function time(): string
     {
         return date('Y-m-d H:i:s');
     }

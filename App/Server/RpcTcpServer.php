@@ -16,7 +16,7 @@ class RpcTcpServer extends TcpServer
 
     public function onReceive(\swoole_server $server, $fd, $reactor_id, $data)
     {
-        $str = $this->callRpc($data, 1);
+        $str = $this->callRpc($data);
         $this->server->send($fd, $str);
     }
 }
