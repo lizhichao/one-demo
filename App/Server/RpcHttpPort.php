@@ -18,7 +18,7 @@ class RpcHttpPort extends Http
     {
         $response->header('Content-type', 'text/plain;charset=utf-8');
         $data = $request->rawContent();
-        $str  = $this->callRpc($data, 1, 'http://' . $request->header['host'] . '/', isset($request->get['px']) ? $request->get['px'] : 'Rpc');
+        $str  = $this->callRpc($data, 1, isset($request->get['host']) ? $request->get['host'] : 'http://' . $request->header['host'] . '/', isset($request->get['prefix']) ? $request->get['prefix'] : 'Rpc');
         $response->end($str);
     }
 }
