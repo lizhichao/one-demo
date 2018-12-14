@@ -26,19 +26,9 @@ class Client
 
     public function __call($name, $arguments)
     {
-        $cli  = $this->client->pop();
         $data = msgpack_pack(['m' => $name, 'args' => $arguments]);
-        $r    = $this->client->sendRs($cli, $data);
-        if ($r === false) {
-            $retry = 0;
-            do {
-                $this->client->del();
-                $cli = $this->client->pop();
-                $this->client->sendRs($cli, $data);
-            } while ($retry < 5 || $r === false);
-        }
-        $ret = msgpack_unpack($this->client->recvRs($cli));
-        $this->client->push($cli);
+        $res  = $this->client->call($data);
+        $ret  = msgpack_unpack($res);
         return $ret;
     }
 }
