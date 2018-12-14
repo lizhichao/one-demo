@@ -8,7 +8,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $this->response->write('hello');
+        return 'hello world';
     }
 
     public function home()

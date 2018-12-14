@@ -12,10 +12,11 @@ return [
         'server_type' => \One\Swoole\OneServer::SWOOLE_HTTP_SERVER,
         'port' => 8081,
         'action' => \App\Server\AppHttpServer::class,
-        'mode' => SWOOLE_BASE,
+        'mode' => SWOOLE_PROCESS,
         'sock_type' => SWOOLE_SOCK_TCP,
         'ip' => '0.0.0.0',
         'set' => [
+            'worker_num' => 10
         ],
 //        'global_data' => [ //globalData 配置
 //            'ip' => '127.0.0.1',
