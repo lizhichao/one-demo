@@ -30,17 +30,17 @@ return [
                 'open_websocket_protocol' => false
             ]
         ],
-        ['port'   => 8083,
-         'action' => \App\Server\RpcTcpPort::class,
-         'type'   => SWOOLE_SOCK_TCP,
-         'protocol' => \One\Protocol\Frame::class, // tcp 打包 解包协议
-         'ip'     => '0.0.0.0',
-         'set'    => [
+        ['port'     => 8083,
+         'action'   => \App\Server\RpcTcpPort::class,
+         'type'     => SWOOLE_SOCK_TCP,
+         'pack_protocol' => \One\Protocol\Frame::class, // tcp 打包 解包协议
+         'ip'       => '0.0.0.0',
+         'set'      => [
              'open_http_protocol'      => false,
              'open_websocket_protocol' => false,
-             'open_length_check' => 1,
-             'package_length_func' => '\One\Protocol\Frame::length',
-             'package_body_offset' => \One\Protocol\Frame::HEAD_LEN,
+             'open_length_check'       => 1,
+             'package_length_func'     => '\One\Protocol\Frame::length',
+             'package_body_offset'     => \One\Protocol\Frame::HEAD_LEN,
          ]
         ]
     ],

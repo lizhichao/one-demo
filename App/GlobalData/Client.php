@@ -8,38 +8,37 @@
 
 namespace App\GlobalData;
 
+use One\Swoole\Client\Tcp;
 
-use One\Swoole\AsyncClient;
-use One\Swoole\GlobalData;
-
-class Client extends AsyncClient
+/**
+ * Class Client
+ * @package App\GlobalData
+ * @mixin Data
+ */
+class Client
 {
+    private $client;
 
-    private $global;
-
-    public function __construct(\swoole_client $cli, array $conf)
+    public function __construct()
     {
-        parent::__construct($cli, $conf);
-        $this->global = new Data();
-    }
-
-    public function onReceive(\swoole_client $cli, $data)
-    {
-        echo 'receive:' . $data . PHP_EOL;
+        $this->client = new Tcp('global_data');
     }
 
     public function __call($name, $arguments)
     {
-        if ($this->connected === 1 && method_exists($this->global, $name)) {
-            $data = msgpack_pack(['m' => $name, 'args' => $arguments]);
-            $this->send($data);
-            if (strpos($name, 'get') !== false) {
-                return msgpack_unpack($this->protocol::decode($this->cli->recv()));
-            } else {
-                return 1;
-            }
-        } else {
-            return 0;
+        $cli  = $this->client->pop();
+        $data = msgpack_pack(['m' => $name, 'args' => $arguments]);
+        $r    = $this->client->sendRs($cli, $data);
+        if ($r === false) {
+            $retry = 0;
+            do {
+                $this->client->del();
+                $cli = $this->client->pop();
+                $this->client->sendRs($cli, $data);
+            } while ($retry < 5 || $r === false);
         }
+        $ret = msgpack_unpack($this->client->recvRs($cli));
+        $this->client->push($cli);
+        return $ret;
     }
 }

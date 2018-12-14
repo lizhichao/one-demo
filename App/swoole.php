@@ -18,9 +18,9 @@ require __DIR__ . '/config.php';
 require _APP_PATH_ . '/Config/rpc.php';
 
 \One\Swoole\OneServer::setConfig(config(isset($argv[1]) ? $argv[1] : 'protocol'));
+\One\Swoole\Client\Tcp::setConfig(config('client'));
 
 \Swoole\Runtime::enableCoroutine();
-
 \One\Swoole\OneServer::runAll();
 
 

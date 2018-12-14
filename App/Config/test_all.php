@@ -21,7 +21,7 @@ return [
         'global_data' => [
             'ip' => '127.0.0.1',
             'port' => 9086,
-            'protocol' => \One\Protocol\Frame::class,
+            'pack_protocol' => \One\Protocol\Frame::class,
             'action' => \App\GlobalData\Client::class,
             'time' => 0.5,
             'async' => 0,
@@ -46,7 +46,7 @@ return [
         ],
         [
             'port' => 8083,
-            'protocol' => \One\Protocol\Text::class,
+            'pack_protocol' => \One\Protocol\Text::class,
             'action' => \App\Test\MixPro\TcpPort::class,
             'type' => SWOOLE_SOCK_TCP,
             'ip' => '0.0.0.0',

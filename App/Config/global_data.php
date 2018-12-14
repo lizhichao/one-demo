@@ -14,7 +14,7 @@ return [
         'mode' => SWOOLE_BASE,
         'sock_type' => SWOOLE_SOCK_TCP,
         'ip' => '127.0.0.1',
-        'protocol' => \One\Protocol\Frame::class, // tcp 打包 解包协议
+        'pack_protocol' => \One\Protocol\Frame::class, // tcp 打包 解包协议
         'set' => [ // set 相关配置
             'worker_num' => 1,
             'reactor_num' => 1,

@@ -25,17 +25,26 @@ class Data
         return $r;
     }
 
+    public function incr($k, $v = 1, $ttl = 0)
+    {
+        $i = $this->get($k);
+        if ($i !== null) {
+            $v += $i;
+        }
+        $this->set($k, $v, $ttl);
+        return $v;
+    }
+
     private function gc()
     {
         $i = rand(1, 10);
-        if ($i == 8) {
-            return 1;
-        }
-        $t = time();
-        foreach ($this->time as $k => $v) {
-            if ($v < $t) {
-                $this->del($k);
-                unset($this->time[$k]);
+        if ($i === 8) {
+            $t = time();
+            foreach ($this->time as $k => $v) {
+                if ($v < $t) {
+                    $this->del($k);
+                    unset($this->time[$k]);
+                }
             }
         }
     }
@@ -48,9 +57,9 @@ class Data
      */
     public function set($key, $val, $time = 0)
     {
-        $ar = $this->toKeys($key);
-        $br = $ar;
-        $wr = &$this->data;
+        $ar  = $this->toKeys($key);
+        $br  = $ar;
+        $wr  = &$this->data;
         $len = count($ar);
         foreach ($ar as $i => $v) {
             array_shift($br);
@@ -68,7 +77,7 @@ class Data
         if ($wr !== $val) {
             $wr = $val;
         }
-        if($time > time()){
+        if ($time > time()) {
             $this->time[$key] = $time;
             $this->gc();
         }
@@ -110,9 +119,9 @@ class Data
                 return null;
             }
         }
-        if(isset($this->time[$key])){
+        if (isset($this->time[$key])) {
             $this->gc();
-            if($this->time[$key] < time()){
+            if ($this->time[$key] < time()) {
                 return null;
             }
         }
@@ -133,7 +142,7 @@ class Data
 
     private function _del($ar, $d = 0)
     {
-        $k = array_pop($ar);
+        $k  = array_pop($ar);
         $wr = &$this->data;
         foreach ($ar as $v) {
             if (is_array($wr) && isset($wr[$v])) {
@@ -156,6 +165,7 @@ class Data
      * @param $name
      * @param string $fd_key
      * @param string $name_key
+     * @return int
      */
     public function bindName($fd, $name, $fd_key = 'fd', $name_key = 'name')
     {
@@ -165,18 +175,21 @@ class Data
         }
         $this->set("{$name_key}-{$fd_key}.{$name}.{$fd}", 1);
         $this->set("{$fd_key}-{$name_key}.{$fd}", $name);
+        return 1;
     }
 
     /**
      * @param $fd
      * @param string $fd_key
      * @param string $name_key
+     * @return int
      */
     public function unBindFd($fd, $fd_key = 'fd', $name_key = 'name')
     {
         $name = $this->getNameByFd($fd, $fd_key, $name_key);
         $this->del("{$name_key}-{$fd_key}.{$name}.{$fd}");
         $this->del("{$fd_key}-{$name_key}.{$fd}");
+        return 1;
     }
 
     /**
@@ -184,6 +197,7 @@ class Data
      * @param $name
      * @param string $fd_key
      * @param string $name_key
+     * @return int
      */
     public function unBindName($name, $fd_key = 'fd', $name_key = 'name')
     {
@@ -192,6 +206,7 @@ class Data
             $this->del("{$fd_key}-{$name_key}.{$fd}");
         }
         $this->del("{$name_key}-{$fd_key}.{$name}");
+        return 1;
     }
 
     /**

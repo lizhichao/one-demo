@@ -28,9 +28,7 @@ class Server extends TcpServer
         $ar = msgpack_unpack($data);
         if (method_exists($this->global, $ar['m'])) {
             $ret = $this->global->{$ar['m']}(...$ar['args']);
-            if (strpos($ar['m'], 'get') !== false) {
-                $this->send($fd, msgpack_pack($ret));
-            }
+            $this->send($fd, msgpack_pack($ret));
         } else {
             echo "warn method {$ar['m']} not exist\n";
         }
