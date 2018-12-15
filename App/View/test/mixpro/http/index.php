@@ -15,7 +15,7 @@
 <p><a href="/mix/ws?code=<?=$code;?>">websocket</a></p>
 <p>
     tcp:连接方法<br>
-    telnet 127.0.0.1 9082<br><br>
+    telnet 127.0.0.1 8083<br><br>
     send name content<br>
     表示向名字为name的用户发送content信息<br><br>
     send all content<br>

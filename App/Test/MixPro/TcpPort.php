@@ -9,6 +9,7 @@
 namespace App\Test\MixPro;
 
 
+use App\GlobalData\Client;
 use One\Swoole\Listener\Tcp;
 
 class TcpPort extends Tcp
@@ -17,13 +18,29 @@ class TcpPort extends Tcp
 
     private $users = [];
 
+    /**
+     * @var Ws
+     */
+    protected $server;
+
+    /**
+     * @var Client
+     */
+    protected $global_data;
+
+    public function __construct($server, $conf)
+    {
+        parent::__construct($server, $conf);
+        $this->global_data = $this->server->global_data;
+    }
+
     public function onConnect(\swoole_server $server, $fd, $reactor_id)
     {
         $name             = uuid();
         $this->users[$fd] = $name;
         $this->sendTo('all', json_encode(['v' => 1, 'n' => $name]));
         $this->sendToTcp($fd, json_encode(['v' => 4, 'n' => $this->getAllName()]));
-        $this->bindName($fd, $name);
+        $this->global_data->bindName($fd, $name);
         $this->send($fd, "你的名字是：" . $name);
     }
 
@@ -42,7 +59,7 @@ class TcpPort extends Tcp
     public function onClose(\swoole_server $server, $fd, $reactor_id)
     {
         echo "tcp close {$fd} \n";
-        parent::onClose($server, $fd, $reactor_id);
+        $this->global_data->unBindFd($fd);
         $this->sendTo('all', json_encode(['v' => 2, 'n' => $this->users[$fd]]));
         unset($this->users[$fd]);
     }

@@ -14,13 +14,13 @@ trait Funs
     protected function sendTo($n, $d)
     {
         if ($n == 'all') {
-            $arr = $this->get('http');
+            $arr = $this->global_data->get('http');
             if ($arr) {
                 foreach ($arr as $name => $v) {
-                    $this->set("data.{$name}.", $d, time() + 60);
+                    $this->global_data->set("data.{$name}.", $d, time() + 60);
                 }
             }
-            $arr = $this->get('fd-name');
+            $arr = $this->global_data->get('fd-name');
             if (!$arr) {
                 return false;
             }
@@ -31,13 +31,13 @@ trait Funs
                 } else if ($info) {
                     $this->sendToTcp($fd, $d);
                 } else {
-                    $this->unBindFd($fd);
+                    $this->global_data->unBindFd($fd);
                 }
             }
-        } else if ($this->get("http.{$n}")) { // http 用户
-            $this->set("data.{$n}.", $d, time() + 60);
+        } else if ($this->global_data->get("http.{$n}")) { // http 用户
+            $this->global_data->set("data.{$n}.", $d, time() + 60);
         } else {
-            $fds = $this->getFdByName($n);
+            $fds = $this->global_data->getFdByName($n);
             if (!$fds) {
                 return false;
             }
@@ -74,14 +74,14 @@ trait Funs
 
     protected function getAllName()
     {
-        $arr = $this->get('http');
+        $arr = $this->global_data->get('http');
         $r   = [];
         if ($arr) {
             foreach ($arr as $name => $v) {
                 $r[$name] = 1;
             }
         }
-        $arr = $this->get('name-fd');
+        $arr = $this->global_data->get('name-fd');
         if ($arr) {
             foreach ($arr as $name => $v) {
                 $r[$name] = 2;

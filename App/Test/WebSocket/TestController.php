@@ -14,11 +14,11 @@ class TestController extends WsController
 {
     public function abc()
     {
-        $this->server->push($this->frame->fd, __METHOD__ . $this->frame->data);
+        $this->server->push($this->frame->fd, __METHOD__ . ' - ' . $this->frame->data);
     }
 
     public function bbb()
     {
-        $this->server->push($this->frame->fd, __METHOD__ . $this->frame->data);
+        $this->server->push($this->frame->fd, __METHOD__ . ' - ' . $this->frame->data);
     }
 }

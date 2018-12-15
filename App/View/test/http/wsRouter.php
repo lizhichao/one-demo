@@ -8,6 +8,10 @@
     <title>ws router</title>
 </head>
 <body>
+<pre>
+打开浏览器控制台 send(url,content)
+send('a','xxxx')
+</pre>
 <script>
 (function (w) {
     let ws = new WebSocket('ws://'+document.location.hostname+':8082');

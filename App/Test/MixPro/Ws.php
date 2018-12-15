@@ -8,6 +8,7 @@
 
 namespace App\Test\MixPro;
 
+use App\GlobalData\Client;
 use One\Swoole\Server\WsServer;
 
 class Ws extends WsServer
@@ -15,6 +16,17 @@ class Ws extends WsServer
     use Funs;
 
     private $users = [];
+
+    /**
+     * @var Client
+     */
+    public $global_data = null;
+
+    public function __construct(\swoole_server $server, array $conf)
+    {
+        parent::__construct($server, $conf);
+        $this->global_data = new Client();
+    }
 
     public function onHandShake(\swoole_http_request $request, \swoole_http_response $response)
     {
@@ -37,7 +49,7 @@ class Ws extends WsServer
         if ($name) {
             $this->users[$request->fd] = $name;
             $this->sendTo('all', json_encode(['v' => 1, 'n' => $name]));
-            $this->bindName($request->fd, $name);
+            $this->global_data->bindName($request->fd, $name);
             return true;
         } else {
             return false;
@@ -47,7 +59,7 @@ class Ws extends WsServer
     public function onClose(\swoole_server $server, $fd, $reactor_id)
     {
         echo "ws close {$fd} \n";
-        parent::onClose($server, $fd, $reactor_id);
+        $this->global_data->unBindFd($fd);
         $this->sendTo('all', json_encode(['v' => 2, 'n' => $this->users[$fd]]));
         unset($this->users[$fd]);
     }

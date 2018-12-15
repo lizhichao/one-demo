@@ -9,8 +9,6 @@
 namespace App\Test\MixPro;
 
 use One\Swoole\Response;
-use One\Swoole\Server;
-use Swoole\Server\Port;
 
 class TestMiddle
 {
@@ -31,14 +29,14 @@ class TestMiddle
     /**
      * @param $next
      * @param Response $response
-     * @param Server|Port $server
+     * @param Ws $server
      * @return string
      */
     public function isLogin($next, Response $response, $server)
     {
         $name = $response->session()->get('name');
         if($name){
-            if($server->get("http.{$name}")){
+            if($server->global_data->get("http.{$name}")){
                 return $response->redirect('/mix/http');
             }else{
                 return $response->redirect('/mix/ws');

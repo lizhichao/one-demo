@@ -17,20 +17,6 @@ return [
         'ip' => '0.0.0.0',
         'set' => [
             'worker_num' => 5
-        ],
-        'global_data' => [
-            'ip' => '127.0.0.1',
-            'port' => 9086,
-            'pack_protocol' => \One\Protocol\Frame::class,
-            'action' => \App\GlobalData\Client::class,
-            'time' => 0.5,
-            'async' => 0,
-            'set' => [
-                'open_length_check'     => 1,
-                'package_length_type'   => 'N',
-                'package_length_offset' => 0,
-                'package_body_offset'   => 0,
-            ]
         ]
     ],
     'add_listener' => [

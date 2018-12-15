@@ -8,7 +8,7 @@
 
 namespace App\Test\MixPro;
 
-
+use App\GlobalData\Client;
 use One\Http\Controller;
 
 class HttpController extends Controller
@@ -17,12 +17,30 @@ class HttpController extends Controller
     use Funs;
 
     /**
+     * @var Ws
+     */
+    protected $server;
+
+    /**
+     * @var Client
+     */
+    protected $global_data;
+
+
+    public function __construct($request, $response, $server = null)
+    {
+        parent::__construct($request, $response, $server);
+        $this->global_data = $this->server->global_data;
+    }
+
+    /**
      * 首页
      */
     public function index()
     {
         $code = sha1(uuid());
         $this->session()->set('code', $code);
+        $r = $this->global_data->incr('a');
         return $this->display('index', ['code' => $code]);
     }
 
@@ -49,7 +67,7 @@ class HttpController extends Controller
             $name = uuid();
             $this->session()->set('name', $name);
         }
-        $this->server->set("http.{$name}", 1, time() + 60);
+        $this->global_data->set("http.{$name}", 1, time() + 60);
         $this->sendTo('all', json_encode(['v' => 1, 'n' => $name]));
         return $this->display('http', ['list' => $this->getAllName(), 'name' => $name]);
     }
@@ -60,10 +78,10 @@ class HttpController extends Controller
     public function httpLoop()
     {
         $name = $this->session()->get('name');
-        $this->server->set("http.{$name}", 1, time() + 60);
+        $this->global_data->set("http.{$name}", 1, time() + 60);
         $i = 0;
         do {
-            $data = $this->server->getAndDel("data.{$name}");
+            $data = $this->global_data->getAndDel("data.{$name}");
             $i++;
             \co::sleep(0.1);
         } while ($data === null && $i < 300);
