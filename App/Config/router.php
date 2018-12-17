@@ -8,6 +8,8 @@ use One\Http\Router;
 
 Router::get('/', \App\Controllers\IndexController::class . '@index');
 
+Router::get('/rpc', \App\Controllers\IndexController::class . '@rpc');
+
 Router::get('/users', [
     'use' => \App\Controllers\IndexController::class . '@userList',
     'as'  => 'users'
@@ -17,9 +19,9 @@ Router::get('/user/{id}', [
     'as'  => 'user'
 ]);
 
-Router::get('/a/{name}',\App\Controllers\IndexController::class . '@aa');
+Router::get('/a/{name}', \App\Controllers\IndexController::class . '@aa');
 
-Router::get('/b/`^log\_\d+$`',\App\Controllers\IndexController::class . '@zz');
+Router::get('/b/`^log\_\d+$`', \App\Controllers\IndexController::class . '@zz');
 
 // orm 列子
 require __DIR__ . '/../Test/Orm/router.php';
