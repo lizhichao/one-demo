@@ -10,7 +10,7 @@ return [
         'ops' => [ // pdo 相关设置
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
             PDO::ATTR_EMULATE_PREPARES => false,
-            PDO::ATTR_PERSISTENT => true
+//            PDO::ATTR_PERSISTENT => true //fpm 下可用
         ]
     ],
     'test' => [
@@ -21,7 +21,7 @@ return [
         'ops' => [
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
             PDO::ATTR_EMULATE_PREPARES => false,
-            PDO::ATTR_PERSISTENT => true
+//            PDO::ATTR_PERSISTENT => true //fpm 下可用
         ]
     ]
 ];
