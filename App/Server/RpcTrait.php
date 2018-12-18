@@ -33,7 +33,10 @@ trait RpcTrait
             return $str;
         } catch (\Throwable $e) {
             Handler::report($e);
-            return msgpack_pack($e->getMessage());
+            return msgpack_pack([
+                'err' => $e->getCode(),
+                'msg' => $e->getMessage()
+            ]);
         }
 
     }
