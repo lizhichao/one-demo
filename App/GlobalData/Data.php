@@ -14,6 +14,21 @@ class Data
 
     private $time = [];
 
+    private $path = '';
+
+    public function __construct($path = '')
+    {
+        $this->path = $path;
+        if (file_exists($path)) {
+            list($this->data, $this->time) = msgpack_unpack(file_get_contents($path));
+        }
+    }
+
+    public function save()
+    {
+        return file_put_contents($this->path, msgpack_pack([$this->data, $this->time]));
+    }
+
     /**
      * @param $key
      * @return array|mixed|null

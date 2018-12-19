@@ -27,21 +27,9 @@ class IndexController extends Controller
             self::$client = new Client();
         }
 
-        $k = 'dd.d';
-        self::$client->push($k, 'a');
-        self::$client->push($k, ['c']);
+        $r = self::$client->incr('asdf', 1);
 
-        var_dump(self::$client->pop($k));
-        echo PHP_EOL;
-        var_dump(self::$client->pop($k));
-        echo PHP_EOL;
-        var_dump(self::$client->length($k));
-        echo PHP_EOL;
-        var_dump(self::$client->pop($k));
-        echo PHP_EOL;
-        var_dump(self::$client->length($k));
-
-        return 'data';
+        return $r;
     }
 }
 

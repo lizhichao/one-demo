@@ -17,10 +17,19 @@ class Server extends TcpServer
      */
     private $global = null;
 
+    private $path = '';
+
+
     public function __construct(\swoole_server $server, array $conf)
     {
         parent::__construct($server, $conf);
-        $this->global = new Data();
+        if (isset($conf['save_path'])) {
+            if (is_dir(dirname($conf['save_path']))) {
+                mkdir(dirname($conf['save_path']), 0755, true);
+            }
+            $this->path = $conf['save_path'];
+        }
+        $this->global = new Data($this->path);
     }
 
     public function onReceive(\swoole_server $server, $fd, $reactor_id, $data)
@@ -36,7 +45,11 @@ class Server extends TcpServer
 
     public function onWorkerStart(\swoole_server $server, $worker_id)
     {
-
+        if ($this->path) {
+            swoole_timer_tick(5000, function () {
+                $this->global->save();
+            });
+        }
     }
 
     public function onClose(\swoole_server $server, $fd, $reactor_id)
