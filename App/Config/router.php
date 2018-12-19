@@ -10,6 +10,8 @@ Router::get('/', \App\Controllers\IndexController::class . '@index');
 
 Router::get('/rpc', \App\Controllers\IndexController::class . '@rpc');
 
+Router::get('/data', \App\Controllers\IndexController::class . '@data');
+
 Router::get('/users', [
     'use' => \App\Controllers\IndexController::class . '@userList',
     'as'  => 'users'

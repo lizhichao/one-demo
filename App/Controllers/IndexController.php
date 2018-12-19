@@ -2,11 +2,14 @@
 
 namespace App\Controllers;
 
+use App\GlobalData\Client;
 use App\Test\Rpc\ClientAbc;
 use One\Http\Controller;
 
 class IndexController extends Controller
 {
+    private static $client = null;
+
     public function index()
     {
         return 'hello world';
@@ -16,6 +19,29 @@ class IndexController extends Controller
     {
         $a = new ClientAbc(5);
         return $a->add(2, 5);
+    }
+
+    public function data()
+    {
+        if (self::$client === null) {
+            self::$client = new Client();
+        }
+
+        $k = 'dd.d';
+        self::$client->push($k, 'a');
+        self::$client->push($k, ['c']);
+
+        var_dump(self::$client->pop($k));
+        echo PHP_EOL;
+        var_dump(self::$client->pop($k));
+        echo PHP_EOL;
+        var_dump(self::$client->length($k));
+        echo PHP_EOL;
+        var_dump(self::$client->pop($k));
+        echo PHP_EOL;
+        var_dump(self::$client->length($k));
+
+        return 'data';
     }
 }
 

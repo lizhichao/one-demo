@@ -25,6 +25,69 @@ class Data
         return $r;
     }
 
+    /**
+     * 在队列末尾追加一个元素
+     * @param $k
+     * @param $v
+     * @return int
+     */
+    public function push($k, $v)
+    {
+        $k = trim($k, '.');
+        $this->set("{$k}.", $v);
+        return 1;
+    }
+
+    /**
+     * 将头部元素弹出
+     * @param $k
+     */
+    public function pop($k)
+    {
+        $ar = $this->toKeys($k);
+        $wr = &$this->data;
+        foreach ($ar as $v) {
+            if (is_array($wr) && isset($wr[$v])) {
+                $wr = &$wr[$v];
+            } else {
+                return null;
+            }
+        }
+        if (is_array($wr)) {
+            return array_shift($wr);
+        } else if (is_string($wr)) {
+            $r  = $wr{0};
+            $wr = substr($wr, 1);
+            return $r;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * 数据长度
+     * @param $k
+     */
+    public function length($k)
+    {
+        $ar = $this->toKeys($k);
+        $wr = &$this->data;
+        foreach ($ar as $v) {
+            if (is_array($wr) && isset($wr[$v])) {
+                $wr = &$wr[$v];
+            } else {
+                return null;
+            }
+        }
+        if (is_array($wr)) {
+            return count($wr);
+        } else if (is_string($wr)) {
+            return strlen($wr);
+        } else {
+            return 0;
+        }
+    }
+
     public function incr($k, $v = 1, $ttl = 0)
     {
         $i = $this->get($k);

@@ -40,7 +40,6 @@ class HttpController extends Controller
     {
         $code = sha1(uuid());
         $this->session()->set('code', $code);
-        $r = $this->global_data->incr('a');
         return $this->display('index', ['code' => $code]);
     }
 
