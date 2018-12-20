@@ -13,4 +13,5 @@ Router::group(['namespace'=>'App\\Test\\Orm'],function (){
     Router::get('insert/all','TestController@insertAll');
     Router::get('update','TestController@update');
     Router::get('delete','TestController@delete');
+    Router::get('find','TestController@find');
 });

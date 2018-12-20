@@ -16,4 +16,11 @@ class ArticleTag extends Model
     CONST TABLE = 'article_tag';
 
     protected $_connection = 'test';
+
+    protected $_cache_time = 0;
+
+    function tag()
+    {
+        return $this->hasOne('tag_id',Tag::class,'id');
+    }
 }

@@ -19,4 +19,14 @@ class Article extends Model
     protected $_ignore_flush_cache_column = ['read_count'];
 
     protected $_connection = 'test';
+
+    /**
+     * 设置关系 用户的文章
+     * @return Model
+     */
+    public function article_tags()
+    {
+        return $this->hasMany('id', ArticleTag::class, 'article_id');
+    }
+
 }

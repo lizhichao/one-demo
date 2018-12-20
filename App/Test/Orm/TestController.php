@@ -18,12 +18,18 @@ class TestController extends Controller
      */
     public function insert()
     {
-        $key = uniqid('',true);
-        $id = User::insert([
-            'a' => $key,
+        $key = uniqid('', true);
+        $id  = User::insert([
+            'name'  => $key,
+            'email' => 'name@aa.com',
         ]);
-        $res = User::find($id);
-        return $key === $res->a ? 'success' : 'err';
+        echo $id . PHP_EOL;
+        $j = rand(1, 5);
+        for ($i = 0; $i < $j; $i++) {
+            $id = User::exec("insert into articles (user_id,title,content) values (?,?,?)", [$id, 'title' . $id . '-' . $i, 'content' . $key], true);
+            echo $id . PHP_EOL;
+        }
+        return 'ok';
     }
 
     /**
@@ -35,9 +41,9 @@ class TestController extends Controller
         $ar = [];
         for ($i = 0; $i < 100; $i++) {
             $ar[] = [
-                'name' => 'name' . $i,
+                'name'  => 'name' . $i,
                 'email' => 'name' . $i . '@aa.com',
-                'age' => rand(10, 70)
+                'age'   => rand(10, 70)
             ];
         }
         $id = User::insert($ar, true);
@@ -84,14 +90,8 @@ class TestController extends Controller
      */
     public function find()
     {
-        //
-        $arr = User::limit(10)->findAll()->toArray();
 
-        // 使用缓存 cache的优先级高于Model的$_cache_time
-        $arr = User::limit(10)->cache(10)->findAll()->toArray();
-
-
-        $arr = User::where('id','>',5)->where('id','<',30)->findAll();
-
+        $arr = User::with('articles.article_tags.tag')->find(2)->toArray();
+        print_r($arr);
     }
 }
