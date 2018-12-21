@@ -9,7 +9,7 @@ CREATE TABLE `users` (
 
 -- 文章表
 CREATE TABLE `articles` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1',
   `read_count` int(10) unsigned NOT NULL DEFAULT '0',
@@ -20,7 +20,7 @@ CREATE TABLE `articles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 评论表
 CREATE TABLE `comments` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `article_id` int(10) unsigned NOT NULL,
   `content` text NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `comments` (
 
 -- 标签表
 CREATE TABLE `tags` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
@@ -40,7 +40,7 @@ CREATE TABLE `tags` (
 
 -- 文章的标签关系表
 CREATE TABLE `article_tag` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tag_id` int(10) unsigned NOT NULL,
   `article_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),

@@ -37,7 +37,7 @@ trait Funs
         } else if ($this->global_data->get("http.{$n}")) { // http 用户
             $this->global_data->set("data.{$n}.", $d, time() + 60);
         } else {
-            $fds = $this->global_data->getFdByName($n);
+            $fds = $this->global_data->getFdById($n);
             if (!$fds) {
                 return false;
             }

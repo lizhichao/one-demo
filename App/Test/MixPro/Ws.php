@@ -49,7 +49,7 @@ class Ws extends WsServer
         if ($name) {
             $this->users[$request->fd] = $name;
             $this->sendTo('all', json_encode(['v' => 1, 'n' => $name]));
-            $this->global_data->bindName($request->fd, $name);
+            $this->global_data->bindId($request->fd, $name);
             return true;
         } else {
             return false;

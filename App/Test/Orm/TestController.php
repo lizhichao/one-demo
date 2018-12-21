@@ -91,7 +91,7 @@ class TestController extends Controller
     public function find()
     {
 
-        $arr = User::with('articles.article_tags.tag')->find(2)->toArray();
-        print_r($arr);
+        $arr = User::with('articles.article_tags.tag')->findAll(2)->toArray();
+        var_dump($arr);
     }
 }

@@ -240,62 +240,62 @@ class Data
 
     /**
      * @param $fd
-     * @param $name
+     * @param $id
      * @param string $fd_key
-     * @param string $name_key
+     * @param string $id_key
      * @return int
      */
-    public function bindName($fd, $name, $fd_key = 'fd', $name_key = 'name')
+    public function bindId($fd, $id, $fd_key = 'fd', $id_key = 'id')
     {
-        $old_name = $this->get("{$fd_key}-{$name_key}.{$fd}");
+        $old_name = $this->get("{$fd_key}-{$id_key}.{$fd}");
         if ($old_name) {
-            $this->del("{$name_key}-{$fd_key}.{$old_name}");
+            $this->del("{$id_key}-{$fd_key}.{$old_name}");
         }
-        $this->set("{$name_key}-{$fd_key}.{$name}.{$fd}", 1);
-        $this->set("{$fd_key}-{$name_key}.{$fd}", $name);
+        $this->set("{$id_key}-{$fd_key}.{$id}.{$fd}", 1);
+        $this->set("{$fd_key}-{$id_key}.{$fd}", $id);
         return 1;
     }
 
     /**
      * @param $fd
      * @param string $fd_key
-     * @param string $name_key
+     * @param string $id_key
      * @return int
      */
-    public function unBindFd($fd, $fd_key = 'fd', $name_key = 'name')
+    public function unBindFd($fd, $fd_key = 'fd', $id_key = 'id')
     {
-        $name = $this->getNameByFd($fd, $fd_key, $name_key);
-        $this->del("{$name_key}-{$fd_key}.{$name}.{$fd}");
-        $this->del("{$fd_key}-{$name_key}.{$fd}");
+        $id = $this->getIdByFd($fd, $fd_key, $id_key);
+        $this->del("{$id_key}-{$fd_key}.{$id}.{$fd}");
+        $this->del("{$fd_key}-{$id_key}.{$fd}");
         return 1;
     }
 
     /**
      * 解除绑定
-     * @param $name
+     * @param $id
      * @param string $fd_key
-     * @param string $name_key
+     * @param string $id_key
      * @return int
      */
-    public function unBindName($name, $fd_key = 'fd', $name_key = 'name')
+    public function unBindId($id, $fd_key = 'fd', $id_key = 'id')
     {
-        $fds = $this->get("{$name_key}-{$fd_key}.{$name}");
+        $fds = $this->get("{$id_key}-{$fd_key}.{$id}");
         foreach ($fds as $fd => $v) {
-            $this->del("{$fd_key}-{$name_key}.{$fd}");
+            $this->del("{$fd_key}-{$id_key}.{$fd}");
         }
-        $this->del("{$name_key}-{$fd_key}.{$name}");
+        $this->del("{$id_key}-{$fd_key}.{$id}");
         return 1;
     }
 
     /**
-     * @param $name
+     * @param $id
      * @param string $fd_key
-     * @param string $name_key
+     * @param string $id_key
      * @return array
      */
-    public function getFdByName($name, $fd_key = 'fd', $name_key = 'name')
+    public function getFdById($id, $fd_key = 'fd', $id_key = 'id')
     {
-        $arr = $this->get("{$name_key}-{$fd_key}.{$name}");
+        $arr = $this->get("{$id_key}-{$fd_key}.{$id}");
         return $arr ? array_keys($arr) : [];
     }
 
@@ -303,12 +303,12 @@ class Data
     /**
      * @param $fd
      * @param string $fd_key
-     * @param string $name_key
+     * @param string $id_key
      * @return string
      */
-    public function getNameByFd($fd, $fd_key = 'fd', $name_key = 'name')
+    public function getIdByFd($fd, $fd_key = 'fd', $id_key = 'id')
     {
-        return $this->get("{$fd_key}-{$name_key}.{$fd}");
+        return $this->get("{$fd_key}-{$id_key}.{$fd}");
     }
 
 }

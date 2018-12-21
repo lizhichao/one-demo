@@ -40,7 +40,7 @@ class TcpPort extends Tcp
         $this->users[$fd] = $name;
         $this->sendTo('all', json_encode(['v' => 1, 'n' => $name]));
         $this->sendToTcp($fd, json_encode(['v' => 4, 'n' => $this->getAllName()]));
-        $this->global_data->bindName($fd, $name);
+        $this->global_data->bindId($fd, $name);
         $this->send($fd, "你的名字是：" . $name);
     }
 
