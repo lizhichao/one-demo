@@ -8,6 +8,7 @@
 
 namespace App\Test\Orm;
 
+use One\Database\Mysql\Join;
 use One\Http\Controller;
 
 class TestController extends Controller
@@ -91,7 +92,14 @@ class TestController extends Controller
     public function find()
     {
 
-        $arr = User::with('articles.article_tags.tag')->findAll(2)->toArray();
-        var_dump($arr);
+//        $arr = User::with('articles.article_tags.tag')->limit(10)->findAll(2)->toArray();
+
+        $arr = User::where('users.id', '>', '1')->leftJoin('articles', 'users.id', 'articles.user_id')->findAll()->toArray();
+
+        $arr = User::where('users.id', '>', '1')->leftJoin('articles', function (Join $q) {
+            $q->on('users.id', 'articles.user_id')->where('articles.read_count', '>', 1);
+        })->findAll()->toArray();
+
+        print_r($arr);
     }
 }
