@@ -16,6 +16,8 @@ class Data
 
     private $path = '';
 
+    private $limit = [];
+
     public function __construct($path = '')
     {
         $this->path = $path;
@@ -27,6 +29,17 @@ class Data
     public function save()
     {
         return file_put_contents($this->path, msgpack_pack([$this->data, $this->time]));
+    }
+
+
+    public function setQueueLimit($k, $limit)
+    {
+        $this->limit[$k] = $limit;
+    }
+
+    public function delQueueLimit($k)
+    {
+        unset($this->limit[$k]);
     }
 
     /**
@@ -50,7 +63,29 @@ class Data
     {
         $k = trim($k, '.');
         $this->set("{$k}.", $v);
+        if (isset($this->limit[$k])) {
+            $this->limit($k, $this->limit[$k]);
+        }
         return 1;
+    }
+
+
+    private function limit($k, $n)
+    {
+        $ar = $this->toKeys($k);
+        $wr = &$this->data;
+        foreach ($ar as $v) {
+            if (is_array($wr) && isset($wr[$v])) {
+                $wr = &$wr[$v];
+            } else {
+                return null;
+            }
+        }
+        if (is_array($wr)) {
+            while (count($wr) > $n) {
+                array_shift($wr);
+            }
+        }
     }
 
     /**
@@ -69,14 +104,18 @@ class Data
             }
         }
         if (is_array($wr)) {
-            return array_shift($wr);
+            $r = array_shift($wr);
         } else if (is_string($wr)) {
             $r  = $wr{0};
             $wr = substr($wr, 1);
-            return $r;
         } else {
-            return null;
+            $r = null;
         }
+
+        if (empty($wr)) {
+            $this->del($k);
+        }
+        return $r;
     }
 
     /**
@@ -121,7 +160,6 @@ class Data
             foreach ($this->time as $k => $v) {
                 if ($v < $t) {
                     $this->del($k);
-                    unset($this->time[$k]);
                 }
             }
         }
@@ -213,6 +251,7 @@ class Data
      */
     public function del($key)
     {
+        unset($this->time[$key], $this->limit[$key]);
         $ar = $this->toKeys($key);
         $this->_del($ar);
         return 1;
