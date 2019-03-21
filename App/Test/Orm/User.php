@@ -9,6 +9,7 @@
 namespace App\Test\Orm;
 
 
+use One\Database\Mysql\Build;
 use One\Database\Mysql\Model;
 
 class User extends Model
@@ -32,5 +33,15 @@ class User extends Model
 
 //        状态为 1 的文章
 //        return $this->hasMany('id', Article::class, 'user_id')->where('status', 1);
+    }
+
+
+    public function events()
+    {
+        return [
+            'beforeGetData' => function (Build $model, &$args) {
+                $model->setConnection('read');
+            },
+        ];
     }
 }

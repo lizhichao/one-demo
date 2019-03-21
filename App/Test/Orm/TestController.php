@@ -81,9 +81,19 @@ class TestController extends Controller
     {
         $row = User::whereIn('id', [61, 71, 81])->delete();
         echo $row . PHP_EOL;// 影响行数
+
+
         $one = User::find(66);
         $row = $one->delete();  // 条件是主键
         echo $row . PHP_EOL;
+
+        $one = User::cache(5)->query("select * from users where id = ? ",[66]);
+        $row = $one->delete();
+
+        $row = User::exec("delete from users where id = ?",[66]);
+
+        $row = User::where('id',66)->delete();
+
     }
 
     /**

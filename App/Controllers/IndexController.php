@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Model\User;
 use App\Test\Rpc\ClientAbc;
 use One\Http\Controller;
 
@@ -11,7 +12,7 @@ class IndexController extends Controller
 
     public function index()
     {
-        return 'hello world';
+        phpinfo();
     }
 
     public function rpc()
