@@ -9,11 +9,20 @@
 namespace App\Test\Model;
 
 
-use One\Database\Mysql\Model;
-
-class TargetTag extends Model
+class TargetTag extends Base
 {
     const TABLE = 'target_tag';
+
+    public function target()
+    {
+        return $this->morphOne([
+            1 => Article::class,
+            2 => Video::class
+        ], [
+            1 => 'id',
+            2 => 'vid'
+        ], 'target_type', 'target_id');
+    }
 
 }
 

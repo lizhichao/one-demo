@@ -9,9 +9,7 @@
 namespace App\Test\Model;
 
 
-use One\Database\Mysql\Model;
-
-class User extends Model
+class User extends Base
 {
     const TABLE = 'users';
 

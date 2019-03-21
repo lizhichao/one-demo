@@ -8,10 +8,17 @@
 
 namespace App\Test\Model;
 
-
-use One\Database\Mysql\Model;
-
-class Tag extends Model
+class Tag extends Base
 {
     const TABLE = 'tags';
+
+    public function target_rel()
+    {
+        return $this->hasMany('id', TargetTag::class, 'tag_id');
+    }
+
+    public function __destruct()
+    {
+        echo __CLASS__ . "\n";
+    }
 }

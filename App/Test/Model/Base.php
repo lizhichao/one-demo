@@ -3,13 +3,16 @@
  * Created by PhpStorm.
  * User: admin
  * Date: 2019/3/21
- * Time: 14:01
+ * Time: 15:45
  */
 
 namespace App\Test\Model;
 
-class Comment extends Base
+
+use One\Database\Mysql\Model;
+
+class Base extends Model
 {
-    const TABLE = 'comments';
+    protected $_cache_time = 0;
 
 }

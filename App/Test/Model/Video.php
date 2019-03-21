@@ -8,10 +8,7 @@
 
 namespace App\Test\Model;
 
-
-use One\Database\Mysql\Model;
-
-class Video extends Model
+class Video extends Base
 {
     const TABLE = 'video';
 }

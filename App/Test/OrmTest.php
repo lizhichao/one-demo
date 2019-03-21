@@ -9,14 +9,43 @@
 namespace App\Test;
 
 
-use App\Test\Model\{Tag, TargetTag, User, Article, ArticleTag, Video, Comment};
+use App\Test\Model\{Tag, TargetTag, User, Article, Video, Comment};
 use One\Database\Mysql\Model;
 
 class OrmTest
 {
     public function __construct()
     {
-        $this->initData();
+//        $this->initData();
+    }
+
+    public function rel()
+    {
+//        $res = Tag::where('id', '>', 19)->with('target_rel.target', [
+//            function ($q) {
+//                $q->orderBy('id asc');
+//            }
+//        ])->orderBy('id asc')->findAll()->toArray();
+//
+//        $res[0]['target_rel'] = array_filter($res[0]['target_rel'], function ($v) {
+//            if($v['target']){
+//                return false;
+//            }
+//
+//            return true;
+//        });
+//        print_r($res);
+
+        $res = Tag::where('id', '>', 18)->findAll()->toArray();
+        echo 'a'.PHP_EOL;
+
+//        $res = Tag::where('id', '>', 19)->findAll();
+//        foreach ($res as $val) {
+//            $val->target_rel->target;
+//        }
+//        print_r($res->toArray());
+
+
     }
 
     /**
@@ -32,7 +61,7 @@ class OrmTest
         Model::exec('truncate comments;');
 
         $data = [];
-        for ($i = 1; $i < 11; $i++) {
+        for ($i = 1; $i < 21; $i++) {
             $data[] = [
                 'name' => 'tag' . $i
             ];
@@ -54,7 +83,7 @@ class OrmTest
         for ($i = 1; $i < 101; $i++) {
             $data[] = [
                 'title'      => 'title' . $i,
-                'user_id'    => rand(1, 101),
+                'user_id'    => rand(1, 100),
                 'source_url' => 'url' . $i,
                 'status'     => rand(0, 5) > 0 ? 1 : 0
             ];
@@ -65,7 +94,7 @@ class OrmTest
         for ($i = 1; $i < 101; $i++) {
             $data[] = [
                 'title'      => 'title' . $i,
-                'user_id'    => rand(1, 101),
+                'user_id'    => rand(1, 100),
                 'content'    => 'url' . $i,
                 'status'     => rand(0, 5) > 0 ? 1 : 0,
                 'read_count' => rand(5, 100)
@@ -74,10 +103,10 @@ class OrmTest
         Article::insert($data, true);
 
         $data = [];
-        for ($i = 1; $i < 601; $i++) {
+        for ($i = 1; $i < 501; $i++) {
             $data[] = [
-                'tag_id'      => rand(1, 11),
-                'target_id'   => rand(1, 101),
+                'tag_id'      => rand(1, 20),
+                'target_id'   => rand(1, 100),
                 'target_type' => rand(1, 2),
             ];
         }
@@ -87,8 +116,8 @@ class OrmTest
         $data = [];
         for ($i = 1; $i < 501; $i++) {
             $data[] = [
-                'user_id'     => rand(1, 101),
-                'target_id'   => rand(1, 101),
+                'user_id'     => rand(1, 100),
+                'target_id'   => rand(1, 100),
                 'target_type' => rand(1, 2),
                 'content'     => 'content' . $i
             ];
