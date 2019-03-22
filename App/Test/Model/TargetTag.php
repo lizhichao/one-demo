@@ -15,7 +15,7 @@ class TargetTag extends Base
 
     public function target()
     {
-        return $this->morphOne([
+        return $this->morphMany([
             1 => Article::class,
             2 => Video::class
         ], [

@@ -36,8 +36,11 @@ class OrmTest
 //        });
 //        print_r($res);
 
-        $res = Tag::where('id', '>', 18)->findAll()->toArray();
-        echo 'a'.PHP_EOL;
+        $res = TargetTag::where('id', '>', 18)->orderBy('id asc')->limit(5)->findAll();
+        foreach ($res as $v){
+            $v->target;
+        }
+        print_r($res->toArray());
 
 //        $res = Tag::where('id', '>', 19)->findAll();
 //        foreach ($res as $val) {
