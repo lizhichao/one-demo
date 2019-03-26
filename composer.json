@@ -18,7 +18,8 @@
   "require": {
     "php": ">=7.0.0",
     "ext-msgpack": "*",
-    "lizhichao/one": "dev-master"
+    "lizhichao/one": "dev-master",
+    "phpunit/phpunit": "^8.0"
   },
   "autoload": {
     "psr-4": {

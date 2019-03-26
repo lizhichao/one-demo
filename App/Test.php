@@ -16,5 +16,3 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/lizhichao/one/src/run.php';
 require __DIR__ . '/config.php';
 
-$o = new \App\Test\OrmTest();
-$o->rel();

@@ -12,7 +12,7 @@ namespace App\Test;
 use App\Test\Model\{Tag, TargetTag, User, Article, Video, Comment};
 use One\Database\Mysql\Model;
 
-class OrmTest
+class OrmTest extends \PHPUnit\Framework\TestCase
 {
     public function __construct()
     {
