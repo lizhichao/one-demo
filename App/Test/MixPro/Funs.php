@@ -20,7 +20,7 @@ trait Funs
                     $this->global_data->set("data.{$name}.", $d, time() + 60);
                 }
             }
-            $arr = $this->global_data->get('fd-name');
+            $arr = $this->global_data->get('fd-id');
             if (!$arr) {
                 return false;
             }
@@ -81,7 +81,7 @@ trait Funs
                 $r[$name] = 1;
             }
         }
-        $arr = $this->global_data->get('name-fd');
+        $arr = $this->global_data->get('id-fd');
         if ($arr) {
             foreach ($arr as $name => $v) {
                 $r[$name] = 2;
