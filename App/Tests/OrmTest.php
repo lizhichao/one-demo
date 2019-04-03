@@ -51,5 +51,14 @@ class OrmTest extends TestCase
         $this->assertEquals($res2, $res1);
     }
 
+    public function testSelect()
+    {
+        $user = User::find(1);
+        $this->assertEquals($user->id, '1');
+        $user_list = User::where('name', ' like ', '%user1%')->findAll()->toArray();
+        $this->assertEquals(count($user_list),12);
+
+    }
+
 }
 
