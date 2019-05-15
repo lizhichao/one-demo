@@ -25,10 +25,10 @@ Router::get('/a/{name}', \App\Controllers\IndexController::class . '@aa');
 
 Router::get('/b/`^log\_\d+$`', \App\Controllers\IndexController::class . '@zz');
 
-// orm 列子
+// orm 例子
 require __DIR__ . '/../Test/Orm/router.php';
 
-// ws 列子
+// ws 例子
 require __DIR__ . '/../Test/WebSocket/router.php';
 
 // 混合协议通讯ss
