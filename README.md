@@ -19,6 +19,9 @@ https://github.com/lizhichao/one
         * [globalData进程之间内存共享使用列子](https://github.com/lizhichao/one-demo/blob/master/README.md#globaldata进程之间内存共享使用列子)
         * [路由中间件使用列子](https://github.com/lizhichao/one-demo/blob/master/README.md#路由中间件使用列子)
     * [小提示](https://github.com/lizhichao/one-demo/blob/master/README.md#小提示)
+    * [rpc使用列子](https://github.com/lizhichao/one-app/tree/test_rpc)
+    * [分布式长连接（tcp）列子](https://github.com/lizhichao/one-app/tree/cloud_demo)
+    * [Actor列子](https://github.com/lizhichao/one-app/tree/actor_demo)
 
 # one框架Demo
 
